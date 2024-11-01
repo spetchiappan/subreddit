@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Subreddit Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background-color: #FF4500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #ff5722;
+        }
+        #selectedSubreddit {
+            margin: 20px 0;
+            font-size: 24px;
+            color: #1a1a1b;
+            min-height: 36px;
+        }
+        #confirmBtn {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Random Subreddit Generator</h1>
+        <button id="generateBtn">Generate Random Subreddit</button>
+        <div id="selectedSubreddit"></div>
+        <button id="confirmBtn">Open Subreddit</button>
+    </div>
+
+    <script>
+        // List of subreddits - add or remove subreddits as needed
+        const subreddits = [
+            'funny',
+            'AskReddit',
+            'gaming',
+            'aww',
+            'pics',
+            'science',
+            'worldnews',
+            'todayilearned'
+        ];
+
+        // Get references to HTML elements
+        const generateBtn = document.getElementById('generateBtn');
+        const confirmBtn = document.getElementById('confirmBtn');
+        const selectedSubredditDiv = document.getElementById('selectedSubreddit');
+        let currentSubreddit = '';
+
+        // Add click event for generate button
+        generateBtn.addEventListener('click', () => {
+            // Get random subreddit
+            const randomIndex = Math.floor(Math.random() * subreddits.length);
+            currentSubreddit = subreddits[randomIndex];
+            
+            // Display the selected subreddit
+            selectedSubredditDiv.textContent = `r/${currentSubreddit}`;
+            
+            // Show the confirm button
+            confirmBtn.style.display = 'inline-block';
+        });
+
+        // Add click event for confirm button
+        confirmBtn.addEventListener('click', () => {
+            // Open subreddit in new tab
+            window.open(`https://reddit.com/r/${currentSubreddit}`, '_blank');
+        });
+    </script>
+</body>
+</html>
